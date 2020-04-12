@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://objetos/inimigo.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/enemy2 (1).png" type="Texture" id=2]
+[ext_resource path="res://script/inimigo_prisioneiro.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "atk"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.75
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 12, 13, 14, 15, 16, 17, 18 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.75
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 19, 20, 21, 22, 23, 24, 25, 22 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 10 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 18.3382, 23.4663 )
+
+[node name="prisioneiro" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+hframes = 27
+frame = 18
+
+[node name="anim" parent="." index="2"]
+anims/atk = SubResource( 1 )
+anims/bone1 = SubResource( 2 )
+anims/bone2 = SubResource( 3 )
+anims/hit = SubResource( 4 )
+anims/run = SubResource( 5 )
+
+[node name="hitbox" type="Area2D" parent="." index="3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox" index="0"]
+shape = SubResource( 6 )
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

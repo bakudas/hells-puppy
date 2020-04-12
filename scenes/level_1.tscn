@@ -1,0 +1,145 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://objetos/pilha.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objetos/inimigo_prisioneiro.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/level01.png" type="Texture" id=3]
+[ext_resource path="res://assets/level01-luz.png" type="Texture" id=4]
+[ext_resource path="res://objetos/GM.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objetos/player.tscn" type="PackedScene" id=6]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 123.372 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 14.234 )
+
+[node name="level1" type="Node2D"]
+
+[node name="GM" parent="." instance=ExtResource( 5 )]
+
+[node name="level01" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="pilha" parent="." instance=ExtResource( 1 )]
+position = Vector2( 25.3469, 276.485 )
+
+[node name="prisioneiro" parent="." instance=ExtResource( 2 )]
+position = Vector2( 157.843, 132.56 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="prisioneiro2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 52.9259, 197.577 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="prisioneiro3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 96.3629, 68.9864 )
+collision_layer = 2
+collision_mask = 4
+
+[node name="player" parent="." instance=ExtResource( 6 )]
+position = Vector2( 30.0807, 276.186 )
+collision_mask = 12
+
+[node name="level01-luz" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.32549 )
+material = SubResource( 1 )
+texture = ExtResource( 4 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="wall" type="RigidBody2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 6
+mode = 1
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall"]
+position = Vector2( -10.9619, 162.558 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
+position = Vector2( 233.419, 161.687 )
+shape = SubResource( 2 )
+
+[node name="gatilhos" type="Area2D" parent="."]
+position = Vector2( -8.66731, 77.234 )
+collision_layer = 8
+collision_mask = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gatilhos"]
+shape = SubResource( 3 )
+
+[node name="gatilhos2" type="Area2D" parent="."]
+position = Vector2( -9.03901, 140.253 )
+collision_layer = 8
+collision_mask = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gatilhos2"]
+shape = SubResource( 3 )
+
+[node name="gatilhos3" type="Area2D" parent="."]
+position = Vector2( 231.921, 138.358 )
+collision_layer = 8
+collision_mask = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gatilhos3"]
+shape = SubResource( 3 )
+
+[node name="gatilhos4" type="Area2D" parent="."]
+position = Vector2( -9.10633, 204.694 )
+collision_layer = 8
+collision_mask = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gatilhos4"]
+shape = SubResource( 3 )
+
+[node name="gatilhos5" type="Area2D" parent="."]
+position = Vector2( 232.858, 205.641 )
+collision_layer = 8
+collision_mask = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gatilhos5"]
+shape = SubResource( 3 )
+
+[node name="gatilhos6" type="Area2D" parent="."]
+position = Vector2( 231.741, 269.134 )
+collision_layer = 8
+collision_mask = 8
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="gatilhos6"]
+shape = SubResource( 3 )
+[connection signal="body_entered" from="gatilhos" to="player" method="_on_gatilhos_body_entered"]
+[connection signal="body_entered" from="gatilhos2" to="player" method="_on_gatilhos2_body_entered"]
+[connection signal="body_entered" from="gatilhos3" to="player" method="_on_gatilhos3_body_entered"]
+[connection signal="body_entered" from="gatilhos4" to="player" method="_on_gatilhos4_body_entered"]
+[connection signal="body_entered" from="gatilhos5" to="player" method="_on_gatilhos5_body_entered"]
+[connection signal="body_entered" from="gatilhos6" to="player" method="_on_gatilhos6_body_entered"]
